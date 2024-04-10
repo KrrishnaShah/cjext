@@ -1,0 +1,48 @@
+Performing C SOURCE FILE Test FLAG_SUPPORTED_Wcomma failed with the following output:
+Change Dir: /media/projects/personal/cjadv/build/CMakeFiles/CMakeScratch/TryCompile-pwqbKi
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_bdfee/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_bdfee.dir/build.make CMakeFiles/cmTC_bdfee.dir/build
+gmake[1]: Entering directory '/media/projects/personal/cjadv/build/CMakeFiles/CMakeScratch/TryCompile-pwqbKi'
+Building C object CMakeFiles/cmTC_bdfee.dir/src.c.o
+/usr/bin/cc -DFLAG_SUPPORTED_Wcomma  -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align -Wformat=2 -Wmissing-prototypes -Wstrict-overflow=2 -Wcast-qual -Wundef -Wswitch-default -Wconversion -Wc++-compat -fstack-protector-strong    -Wcomma -o CMakeFiles/cmTC_bdfee.dir/src.c.o -c /media/projects/personal/cjadv/build/CMakeFiles/CMakeScratch/TryCompile-pwqbKi/src.c
+cc: error: unrecognized command-line option '-Wcomma'; did you mean '-Wcomment'?
+gmake[1]: *** [CMakeFiles/cmTC_bdfee.dir/build.make:78: CMakeFiles/cmTC_bdfee.dir/src.c.o] Error 1
+gmake[1]: Leaving directory '/media/projects/personal/cjadv/build/CMakeFiles/CMakeScratch/TryCompile-pwqbKi'
+gmake: *** [Makefile:127: cmTC_bdfee/fast] Error 2
+
+
+Source file was:
+int main(void) { return 0; }
+
+Performing C SOURCE FILE Test FLAG_SUPPORTED_Wmissingvariabledeclarations failed with the following output:
+Change Dir: /media/projects/personal/cjadv/build/CMakeFiles/CMakeScratch/TryCompile-SaWyge
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_bade7/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_bade7.dir/build.make CMakeFiles/cmTC_bade7.dir/build
+gmake[1]: Entering directory '/media/projects/personal/cjadv/build/CMakeFiles/CMakeScratch/TryCompile-SaWyge'
+Building C object CMakeFiles/cmTC_bade7.dir/src.c.o
+/usr/bin/cc -DFLAG_SUPPORTED_Wmissingvariabledeclarations  -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align -Wformat=2 -Wmissing-prototypes -Wstrict-overflow=2 -Wcast-qual -Wundef -Wswitch-default -Wconversion -Wc++-compat -fstack-protector-strong -Wdouble-promotion -Wparentheses -Wformat-overflow -Wunused-macros    -Wmissing-variable-declarations -o CMakeFiles/cmTC_bade7.dir/src.c.o -c /media/projects/personal/cjadv/build/CMakeFiles/CMakeScratch/TryCompile-SaWyge/src.c
+cc: error: unrecognized command-line option '-Wmissing-variable-declarations'; did you mean '-Wmissing-declarations'?
+gmake[1]: *** [CMakeFiles/cmTC_bade7.dir/build.make:78: CMakeFiles/cmTC_bade7.dir/src.c.o] Error 1
+gmake[1]: Leaving directory '/media/projects/personal/cjadv/build/CMakeFiles/CMakeScratch/TryCompile-SaWyge'
+gmake: *** [Makefile:127: cmTC_bade7/fast] Error 2
+
+
+Source file was:
+int main(void) { return 0; }
+
+Performing C SOURCE FILE Test FLAG_SUPPORTED_Wusedbutmarkedunused failed with the following output:
+Change Dir: /media/projects/personal/cjadv/build/CMakeFiles/CMakeScratch/TryCompile-mtRC1l
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_8a9bf/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_8a9bf.dir/build.make CMakeFiles/cmTC_8a9bf.dir/build
+gmake[1]: Entering directory '/media/projects/personal/cjadv/build/CMakeFiles/CMakeScratch/TryCompile-mtRC1l'
+Building C object CMakeFiles/cmTC_8a9bf.dir/src.c.o
+/usr/bin/cc -DFLAG_SUPPORTED_Wusedbutmarkedunused  -std=c89 -pedantic -Wall -Wextra -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align -Wformat=2 -Wmissing-prototypes -Wstrict-overflow=2 -Wcast-qual -Wundef -Wswitch-default -Wconversion -Wc++-compat -fstack-protector-strong -Wdouble-promotion -Wparentheses -Wformat-overflow -Wunused-macros    -Wused-but-marked-unused -o CMakeFiles/cmTC_8a9bf.dir/src.c.o -c /media/projects/personal/cjadv/build/CMakeFiles/CMakeScratch/TryCompile-mtRC1l/src.c
+cc: error: unrecognized command-line option '-Wused-but-marked-unused'
+gmake[1]: *** [CMakeFiles/cmTC_8a9bf.dir/build.make:78: CMakeFiles/cmTC_8a9bf.dir/src.c.o] Error 1
+gmake[1]: Leaving directory '/media/projects/personal/cjadv/build/CMakeFiles/CMakeScratch/TryCompile-mtRC1l'
+gmake: *** [Makefile:127: cmTC_8a9bf/fast] Error 2
+
+
+Source file was:
+int main(void) { return 0; }
+
