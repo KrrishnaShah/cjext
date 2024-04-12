@@ -27,16 +27,18 @@ void app_main(void)
 
     const char *test_json_string =
         "{"
-        "\"name\": \"Krishna\","
-        "\"bool\": true,"
-        "\"number\":1234,"
-        "\"surname\": \"Sah\","
-        "\"null_array\":[],"
-        "\"array\": [\"Ramesh\",\"Rajesh\",\"Lomas\",\"Nabin\",\"Riken\"],"
-        "\"num-array\": [1, 10, 100, 1000],"
-        "\"object\": {\"slc\": \"2010\",\"hseb\": \"2012\",\"bachelore\": \"2016\"},"
-        "\"object\": {\"slc\": 2010,\"hseb\": 2012,\"bachelore\": 2016,\"master\": 2024},"
-        "\"null_obj\":{\"null-o\":{\"null-o\":{}}}"
+        // "\"name\": \"Krishna\","
+        // "\"bool\": true,"
+        // "\"number\":1234,"
+        // "\"surname\": \"Sah\","
+        // "\"null_array\":[],"
+        // "\"array\": [\"Ramesh\",\"Rajesh\",\"Lomas\",\"Nabin\",\"Riken\"]"
+        // "\"num-array\": [1, 10, 100, 1000],"
+        "\"obj-array\":[{\"abc\":\"dfg\",\"fsdf\":\"dfg\"},{\"abc\":\"dfg\",\"fsdf\":\"dfg\"}]"
+        // "\"obj-array\":[{\"name\":\"krishna\"},{\"name\":\"lomas\"}]"
+        // "\"object\": {\"slc\": \"2010\",\"hseb\": \"2012\",\"bachelore\": \"2016\"}"
+        // "\"object\": {\"slc\": 2010,\"hseb\": 2012,\"bachelore\": 2016,\"master\": 2024},"
+        // "\"null_obj\":{\"null-o\":{\"null-o\":{\"a\":[{},{}]}}}"
         "}";
 
     TRACE_D("size of 'test_json_string': %d\r\n\r\n", strlen(test_json_string));
@@ -44,16 +46,18 @@ void app_main(void)
     cJSON *cj_test = cJSON_ParseWithRef(test_json_string);
     if (cj_test)
     {
-        cJSON_AddRawToObject(cj_test, "raw", raw_json);
-        int req_buffer_len = cJSON_EstimatePrintLength(cj_test, 0);
+        // cJSON_AddRawToObject(cj_test, "raw", raw_json);
+        int req_buffer_len = cJSON_EstimatePrintLength(cj_test);
         printf("\r\n\r\n");
-        TRACE_D("req_buffer_len: %d", req_buffer_len);
 
-        char *test_str = malloc(req_buffer_len + 1000);
+        TRACE_D("req_buffer_len: %d", req_buffer_len);
+        char *test_str = malloc(req_buffer_len);
 
         if (test_str)
         {
-            if (cJSON_True == cJSON_PrintPreallocated(cj_test, test_str, req_buffer_len, true))
+            memset(test_str, '\0', req_buffer_len);
+
+            if (1 == cJSON_PrintPreallocated(cj_test, test_str, req_buffer_len, true))
             {
                 TRACE_D("size of 'test_str': %d", strlen(test_str));
                 printf("\r\n\r\n");

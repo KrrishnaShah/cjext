@@ -1283,8 +1283,6 @@ static cJSON_bool parse_string_with_ref(cJSON *const item, parse_buffer *const i
 
         input_buffer->offset = (size_t)(input_end - input_buffer->content);
         input_buffer->offset++;
-
-        // TRACE_D("Len: %d, value: %.*s\r\n", item->str_value_len, item->str_value_len, item->valuestring);
     }
 
     return true;
@@ -1300,10 +1298,10 @@ fail:
 
 static cJSON_bool parse_value_with_ref(cJSON *const item, parse_buffer *const input_buffer)
 {
-    // TRACE_D("here \r\n");
+
     if ((input_buffer == NULL) || (input_buffer->content == NULL))
     {
-        // TRACE_D("here \r\n");
+
         return false; /* no input */
     }
 
@@ -1333,7 +1331,7 @@ static cJSON_bool parse_value_with_ref(cJSON *const item, parse_buffer *const in
     /* string */
     if (can_access_at_index(input_buffer, 0) && (buffer_at_offset(input_buffer)[0] == '\"'))
     {
-        // TRACE_D("here \r\n");
+
         return parse_string_with_ref(item, input_buffer);
     }
     /* number */
@@ -1349,7 +1347,6 @@ static cJSON_bool parse_value_with_ref(cJSON *const item, parse_buffer *const in
     /* object */
     if (can_access_at_index(input_buffer, 0) && (buffer_at_offset(input_buffer)[0] == '{'))
     {
-        // TRACE_D("here \r\n");
         return parse_object_with_ref(item, input_buffer);
     }
 
@@ -1382,15 +1379,11 @@ cJSON_ParseWithRefWithLengthOpts(const char *value, size_t buffer_length, const 
         goto fail;
     }
 
-    // TRACE_D("here \r\n");
-
     if (!parse_value_with_ref(item, buffer_skip_whitespace(skip_utf8_bom(&buffer))))
     {
         /* parse failure. ep is set. */
         goto fail;
     }
-
-    // TRACE_D("here \r\n");
 
     /* if we require null-terminated JSON without appended garbage, skip and then check for a null terminator */
     if (require_null_terminated)
@@ -1406,8 +1399,6 @@ cJSON_ParseWithRefWithLengthOpts(const char *value, size_t buffer_length, const 
     {
         *return_parse_end = (const char *)buffer_at_offset(&buffer);
     }
-
-    // TRACE_D("here \r\n");
 
     return item;
 
@@ -1702,16 +1693,24 @@ static cJSON_bool print_value(const cJSON *const item, printbuffer *const output
     }
 
     case cJSON_String:
+    {
         return print_string(item, output_buffer);
+    }
 
     case cJSON_Array:
+    {
         return print_array(item, output_buffer);
+    }
 
     case cJSON_Object:
+    {
         return print_object(item, output_buffer);
+    }
 
     default:
+    {
         return false;
+    }
     }
 }
 
@@ -2285,6 +2284,7 @@ static cJSON_bool print_object(const cJSON *const item, printbuffer *const outpu
         /* print comma if not last */
         length = ((size_t)(output_buffer->format ? 1 : 0) + (size_t)(current_item->next ? 1 : 0));
         output_pointer = ensure(output_buffer, length + 1);
+
         if (output_pointer == NULL)
         {
             return false;
@@ -3713,8 +3713,7 @@ cJSON_free(void *object)
     global_hooks.deallocate(object);
 }
 
-CJSON_PUBLIC(int)
-cJSON_EstimatePrintLength(cJSON *item, uint32_t child_offset)
+static int __estimateFromatedPrintLength(cJSON *item, uint32_t child_offset)
 {
     int ret = 0;
 
@@ -3758,10 +3757,10 @@ cJSON_EstimatePrintLength(cJSON *item, uint32_t child_offset)
             print_number(item, &prt_buffer);
             ret += strlen(tmp_buffer);
 
-            if (item->next)
-            {
-                ret += 1;
-            }
+            // if (item->next)
+            // {
+            //     ret += 1;
+            // }
             break;
         }
         case cJSON_String:
@@ -3777,13 +3776,25 @@ cJSON_EstimatePrintLength(cJSON *item, uint32_t child_offset)
         case cJSON_Array:
         {
             ret += 2;
-            ret += cJSON_EstimatePrintLength(item->child, 0);
+            if (item->child)
+            {
+                if (item->child->type == cJSON_Object)
+                {
+                    ret += __estimateFromatedPrintLength(item->child, child_offset + 1);
+                    // ret--;
+                }
+                else
+                {
+                    ret += __estimateFromatedPrintLength(item->child, 1);
+                    ret--;
+                }
+            }
             break;
         }
         case cJSON_Object:
         {
             ret += 3 + child_offset;
-            ret += cJSON_EstimatePrintLength(item->child, child_offset + 1);
+            ret += __estimateFromatedPrintLength(item->child, child_offset + 1);
             break;
         }
         default:
@@ -3802,4 +3813,10 @@ cJSON_EstimatePrintLength(cJSON *item, uint32_t child_offset)
     }
 
     return ret;
+}
+
+CJSON_PUBLIC(int)
+cJSON_EstimatePrintLength(cJSON *item)
+{
+    return (10 + __estimateFromatedPrintLength(item, 0));
 }

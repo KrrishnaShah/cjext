@@ -384,7 +384,7 @@ extern "C"
   cJSON_ParseWithRefWithLengthOpts(const char *value, size_t buffer_length, const char **return_parse_end, cJSON_bool require_null_terminated);
 
   CJSON_PUBLIC(int)
-  cJSON_EstimatePrintLength(cJSON *item, uint32_t child_offset);
+  cJSON_EstimatePrintLength(cJSON *item);
 
 #ifdef __cplusplus
 }
