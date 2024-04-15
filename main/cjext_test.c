@@ -27,18 +27,20 @@ void app_main(void)
 
     const char *test_json_string =
         "{"
-        // "\"name\": \"Krishna\","
-        // "\"bool\": true,"
-        // "\"number\":1234,"
-        // "\"surname\": \"Sah\","
-        // "\"null_array\":[],"
-        // "\"array\": [\"Ramesh\",\"Rajesh\",\"Lomas\",\"Nabin\",\"Riken\"]"
-        // "\"num-array\": [1, 10, 100, 1000],"
-        "\"obj-array\":[{\"abc\":\"dfg\",\"fsdf\":\"dfg\"},{\"abc\":\"dfg\",\"fsdf\":\"dfg\"}]"
-        // "\"obj-array\":[{\"name\":\"krishna\"},{\"name\":\"lomas\"}]"
-        // "\"object\": {\"slc\": \"2010\",\"hseb\": \"2012\",\"bachelore\": \"2016\"}"
-        // "\"object\": {\"slc\": 2010,\"hseb\": 2012,\"bachelore\": 2016,\"master\": 2024},"
-        // "\"null_obj\":{\"null-o\":{\"null-o\":{\"a\":[{},{}]}}}"
+        "\"name\": \"Krishna\","
+        "\"bool\": true,"
+        "\"number\":1234,"
+        "\"surname\": \"Sah\","
+        "\"null_array\":[],"
+        "\"array\": [\"Ramesh\",\"Rajesh\",\"Lomas\",\"Nabin\",\"Riken\"],"
+        "\"num-array\": [1, 10, 100, 1000],"
+        "\"num-array\": [{},{}],"
+        "\"obj-array\":[{\"abc\":\"dfg\",\"fsdf\":\"dfg\"},{\"abc\":\"dfg\",\"fsdf\":\"dfg\"}],"
+        "\"obj-array\":[{\"name\":\"krishna\"},{\"name\":\"lomas\"}],"
+        "\"object\": {\"slc\": \"2010\",\"hseb\": \"2012\",\"bachelore\": \"2016\"},"
+        "\"object\": {\"slc\": 2010,\"hseb\": 2012,\"bachelore\": 2016,\"master\": 2024},"
+        "\"null_obj\":{\"null-o\":{\"null-o\":{\"a\":[{},{}]}}},"
+        "\"obj\":{\"obj1\":{},\"obj2\":{}}"
         "}";
 
     TRACE_D("size of 'test_json_string': %d\r\n\r\n", strlen(test_json_string));
@@ -51,6 +53,8 @@ void app_main(void)
         printf("\r\n\r\n");
 
         TRACE_D("req_buffer_len: %d", req_buffer_len);
+
+        req_buffer_len += 10;
         char *test_str = malloc(req_buffer_len);
 
         if (test_str)

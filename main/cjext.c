@@ -3781,7 +3781,13 @@ static int __estimateFromatedPrintLength(cJSON *item, uint32_t child_offset)
                 if (item->child->type == cJSON_Object)
                 {
                     ret += __estimateFromatedPrintLength(item->child, child_offset + 1);
-                    // ret--;
+                    ret--;
+                    cJSON *child = item->child;
+                    while (child)
+                    {
+                        ret--;
+                        child = child->next;
+                    }
                 }
                 else
                 {
@@ -3793,7 +3799,15 @@ static int __estimateFromatedPrintLength(cJSON *item, uint32_t child_offset)
         }
         case cJSON_Object:
         {
-            ret += 3 + child_offset;
+            if (item->string)
+            {
+                ret += 3 + child_offset;
+            }
+            else
+            {
+                ret += 3 + child_offset;
+            }
+
             ret += __estimateFromatedPrintLength(item->child, child_offset + 1);
             break;
         }
@@ -3818,5 +3832,5 @@ static int __estimateFromatedPrintLength(cJSON *item, uint32_t child_offset)
 CJSON_PUBLIC(int)
 cJSON_EstimatePrintLength(cJSON *item)
 {
-    return (10 + __estimateFromatedPrintLength(item, 0));
+    return (__estimateFromatedPrintLength(item, 0));
 }
